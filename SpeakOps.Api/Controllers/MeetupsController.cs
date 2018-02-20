@@ -37,7 +37,7 @@ namespace SpeakOps.Api.Controllers
                             callForProposals = "https://github.com/nottsjs/speakers",
                             email = "contact@nottsjs.org",
                             twitter = "https://twitter.com/nottsjs",
-                            website = "https://nottsjs.org/"
+                            website = "https://nottsjs.org"
                         },
                         speakerPack =
                         "https://docs.google.com/document/d/1lzFu_UDTHOhEJKlgJwawV7cWiiVRZDcXt0q1kPHg2M0/edit?usp=sharing"
