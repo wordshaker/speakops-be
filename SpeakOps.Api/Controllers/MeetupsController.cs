@@ -2,42 +2,46 @@
 
 namespace SpeakOps.Api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/v1/[controller]")]
     public class MeetupsController : Controller
     {
         [HttpGet]
         public IActionResult Get()
         {
-            return new ObjectResult(new[]
+            return new ObjectResult(new
             {
-                new
+                meetups = new[]
                 {
-                    location = new
+                    new
                     {
-                        longitude = 52.9536,
-                        latitude = -1.15047,
-                        city = "Nottingham",
-                        country = "United Kingdom"
-                    },
-                    name = "NottsJS",
-                    travelAndExpenses = true,
-                    topics = new[] {"Javascript", "Technology"},
-                    organisers = new[]
-                    {
-                        new
+                        location = new
                         {
-                            name = "David Wood",
-                            twitter = "https://twitter.com/codesleuth"
-                        }
-                    },
-                    contactDetails = new
-                    {
-                        callForProposals = "https://github.com/nottsjs/speakers",
-                        email = "contact@nottsjs.org",
-                        twitter = "https://twitter.com/nottsjs",
-                        website = "https://nottsjs.org/"
-                    },
-                    speakerPack = "https://docs.google.com/document/d/1lzFu_UDTHOhEJKlgJwawV7cWiiVRZDcXt0q1kPHg2M0/edit?usp=sharing"
+                            longitude = 52.9536,
+                            latitude = -1.15047,
+                            city = "Nottingham",
+                            country = "United Kingdom"
+                        },
+                        name = "NottsJS",
+                        travelAndExpenses = true,
+                        topics = new[] {"Javascript", "Technology"},
+                        organisers = new[]
+                        {
+                            new
+                            {
+                                name = "David Wood",
+                                twitter = "https://twitter.com/codesleuth"
+                            }
+                        },
+                        contactDetails = new
+                        {
+                            callForProposals = "https://github.com/nottsjs/speakers",
+                            email = "contact@nottsjs.org",
+                            twitter = "https://twitter.com/nottsjs",
+                            website = "https://nottsjs.org"
+                        },
+                        speakerPack =
+                        "https://docs.google.com/document/d/1lzFu_UDTHOhEJKlgJwawV7cWiiVRZDcXt0q1kPHg2M0/edit?usp=sharing"
+                    }
                 }
             });
         }
