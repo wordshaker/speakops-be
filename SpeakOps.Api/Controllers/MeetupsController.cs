@@ -2,7 +2,7 @@
 
 namespace SpeakOps.Api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/v1/[controller]")]
     public class MeetupsController : Controller
     {
         [HttpGet]
