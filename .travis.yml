@@ -1,0 +1,10 @@
+language: csharp
+solution: SpeakOps.Api.sln
+mono: none
+dotnet: 2.0.5
+
+install:
+  - dotnet restore
+script:
+  - dotnet build
+  - dotnet test SpeakOps.Api.AcceptanceTests/SpeakOps.Api.AcceptanceTests.csproj
