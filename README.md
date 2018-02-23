@@ -3,9 +3,9 @@
 
 Useful docker commands
 ----------------------
-To build (where X.X.X is a version):
+To build:
 ```bash
-docker build -t speakops-be:vX.X.X .
+docker build -t moretonb/speakops-be:lastest .
 ```
 To view latest two docker images:
 ```bash
@@ -13,7 +13,7 @@ docker images | head -n2
 ```
 To run:
 ```bash
-docker run -d -t -p 5000:5000 --name speakops-be speakops-be:vX.X.X
+docker run -d -t -p 5000:5000 --name speakops-be speakops-be:lastest
 ```
 To check logs:
 ```bash
@@ -23,6 +23,19 @@ To remove:
 ```bash
 docker rm speakops-be
 ```
+To login:
+```bash
+docker login
+```
+To push image up to docker hub (kicks off a deployment if tagged as latest):
+```bash
+docker push moretonb/speakops-be:latest
+```
+
+Azure Web App for Containers
+----------------------
+Gotchas:
+* Make sure the appsetting WEBSITES_PORT hooks up the right port on the container (WEBSITES_PORT=5000)
 
 Postman collection for use with a running local docker image
 ------------------------------------------------------------

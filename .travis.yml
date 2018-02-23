@@ -1,10 +1,22 @@
+sudo: required
+
 language: csharp
 solution: SpeakOps.Api.sln
 mono: none
 dotnet: 2.1.4
 
+services:
+  - docker
+  
 install:
   - dotnet restore
+  
 script:
   - dotnet build
   - dotnet test SpeakOps.Api.AcceptanceTests/SpeakOps.Api.AcceptanceTests.csproj
+  
+deploy:
+  provider: script
+  script: bash docker_push
+  on:
+    branch: master
