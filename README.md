@@ -5,7 +5,7 @@ Useful docker commands
 ----------------------
 To build:
 ```bash
-docker build -t moretonb/speakops-be lastest .
+docker build -t moretonb/speakops-be:lastest .
 ```
 To view latest two docker images:
 ```bash
@@ -13,7 +13,7 @@ docker images | head -n2
 ```
 To run:
 ```bash
-docker run -d -t -p 5000:5000 --name speakops-be speakops-be:vX.X.X
+docker run -d -t -p 5000:5000 --name speakops-be speakops-be:lastest
 ```
 To check logs:
 ```bash
