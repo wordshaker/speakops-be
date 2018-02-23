@@ -16,7 +16,7 @@ namespace SpeakOps.Api.Controllers
                     {
                         location = new
                         {
-                            longitude = 52.9536,
+                            longitude = 52.9535,
                             latitude = -1.15047,
                             city = "Nottingham",
                             country = "United Kingdom"

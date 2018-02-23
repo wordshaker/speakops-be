@@ -46,7 +46,7 @@ namespace SpeakOps.Api.AcceptanceTests
             var meetup = content.Meetups[0];
             meetup.Location.City.ShouldBe("Nottingham");
             meetup.Location.Country.ShouldBe("United Kingdom");
-            meetup.Location.Longitude.ShouldBe("52.9536");
+            meetup.Location.Longitude.ShouldBe("52.9535");
             meetup.Location.Latitude.ShouldBe("-1.15047");
 
             meetup.Name.ShouldBe("NottsJS");
