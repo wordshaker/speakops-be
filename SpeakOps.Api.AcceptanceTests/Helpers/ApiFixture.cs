@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Newtonsoft.Json.Linq;
 
 namespace SpeakOps.Api.AcceptanceTests.Helpers
 {
@@ -37,10 +38,10 @@ namespace SpeakOps.Api.AcceptanceTests.Helpers
             return await GetResponseOrPerformHttpRequest();
         }
 
-        public async Task<T> Content<T>()
+        public async Task<JToken> Content()
         {
             var response = await GetResponseOrPerformHttpRequest();
-            return await response.Content.ReadAsAsync<T>();
+            return await response.Content.ReadAsync();
         }
 
         public virtual void Dispose()

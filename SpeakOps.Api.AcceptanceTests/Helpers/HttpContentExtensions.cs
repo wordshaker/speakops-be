@@ -1,15 +1,15 @@
 ﻿using System.Net.Http;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace SpeakOps.Api.AcceptanceTests.Helpers
 {
     public static class HttpContentExtensions
     {
-        public static async Task<T> ReadAsAsync<T>(this HttpContent content)
+        public static async Task<JToken> ReadAsync(this HttpContent content)
         {
             var json = await content.ReadAsStringAsync();
-            var value = JsonConvert.DeserializeObject<T>(json);
+            var value = JToken.Parse(json);
 
             return value;
         }
