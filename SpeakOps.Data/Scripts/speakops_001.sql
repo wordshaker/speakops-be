@@ -14,7 +14,7 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 CREATE TABLE meetups (
-    id bigint NOT NULL,
+    id serial NOT NULL,
     location point NOT NULL,
     city character varying(58) NOT NULL,
     country character varying(36) NOT NULL,
@@ -30,7 +30,7 @@ CREATE TABLE meetups (
 ALTER TABLE meetups OWNER TO postgres;
 
 CREATE TABLE organisers (
-    id bigint NOT NULL,
+    id serial NOT NULL,
     name character varying(100) NOT NULL,
     twitter character varying(35)
 );
@@ -38,24 +38,24 @@ CREATE TABLE organisers (
 ALTER TABLE organisers OWNER TO postgres;
 
 CREATE TABLE organisers_meetups (
-    id bigint NOT NULL,
-    organiserid bigint NOT NULL,
-    meetupid bigint NOT NULL
+    id serial NOT NULL,
+    organiserid integer NOT NULL,
+    meetupid integer NOT NULL
 );
 
 ALTER TABLE organisers_meetups OWNER TO postgres;
 
 CREATE TABLE topics (
-    id bigint NOT NULL,
+    id serial NOT NULL,
     name character varying(100) NOT NULL
 );
 
 ALTER TABLE topics OWNER TO postgres;
 
 CREATE TABLE topics_meetups (
-    id bigint NOT NULL,
-    topicid bigint NOT NULL,
-    meetupid bigint NOT NULL
+    id serial NOT NULL,
+    topicid integer NOT NULL,
+    meetupid integer NOT NULL
 );
 
 ALTER TABLE topics_meetups OWNER TO postgres;
