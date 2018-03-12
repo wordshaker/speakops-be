@@ -1,0 +1,12 @@
+version: "3.4"
+services:
+  db:
+      image: postgres:alpine
+      environment:
+        - POSTGRES_USER=speakops_user
+        - POSTGRES_USERNAME=speakops   
+        - POSTGRES_PASSWORD=Spe@k0ps
+        - POSTGRES_DATABASE=speakops
+      restart: unless-stopped
+      ports:
+        - 5435:5432
