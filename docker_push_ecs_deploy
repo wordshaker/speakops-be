@@ -20,5 +20,5 @@ curl https://raw.githubusercontent.com/silinternational/ecs-deploy/master/ecs-de
 sudo chmod +x /usr/bin/ecs-deploy
 echo "ecs-deploy downloaded"
 
-ecs-deploy -c $CLUSTER -n $SERVICE -i moretonb/speakops-be:latest
+ecs-deploy -c $CLUSTER -n $SERVICE -i moretonb/speakops-be:latest -t 20
 echo "kicked off new ECS deploy with updated image"

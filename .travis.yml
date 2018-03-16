@@ -23,4 +23,4 @@ deploy:
   provider: script
   script: bash docker_push_ecs_deploy
   on:
-    branch: MigrateToAws
+    branch: master
