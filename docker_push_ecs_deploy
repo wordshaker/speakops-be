@@ -1,0 +1,13 @@
+#!/bin/bash
+docker build -t moretonb/speakops-be:latest .
+docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD";
+docker push moretonb/speakops-be:latest
+
+pip install --user awscli
+export PATH=$PATH:$HOME/.local/bin
+eval $(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION)
+
+curl https://raw.githubusercontent.com/silinternational/ecs-deploy/master/ecs-deploy | sudo tee -a /usr/bin/ecs-deploy
+sudo chmod +x /usr/bin/ecs-deploy
+
+ecs-deploy -c $CLUSTER -n $SERVICE -i moretonb/speakops-be:latest
