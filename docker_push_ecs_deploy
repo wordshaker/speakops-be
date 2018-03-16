@@ -16,8 +16,8 @@ aws configure set region "$AWS_DEFAULT_REGION"
 aws configure set output json
 echo "AWS CLI configured"
 
-curl https://raw.githubusercontent.com/silinternational/ecs-deploy/master/ecs-deploy > $PATH:$HOME/.local/bin/ecs-deploy
-sudo chmod +x $PATH:$HOME/.local/bin/ecs-deploy
+curl https://raw.githubusercontent.com/silinternational/ecs-deploy/master/ecs-deploy > ecs-deploy
+sudo chmod +x ecs-deploy
 echo "ecs-deploy downloaded"
 
 ecs-deploy -c $CLUSTER -n $SERVICE -i moretonb/speakops-be:latest
