@@ -1,0 +1,24 @@
+#!/bin/bash
+docker build -t moretonb/speakops-be:latest .
+docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD";
+docker push moretonb/speakops-be:latest
+echo "new image pushed to docker"
+
+pip install --upgrade pip
+echo "pip upgraded"
+pip install --user awscli
+export PATH=$PATH:$HOME/.local/bin
+echo "AWS CLI installed"
+
+aws configure set aws_access_key_id "$AWS_ACCESS_KEY_ID"
+aws configure set aws_secret_access_key "$AWS_SECRET_ACCESS_KEY"
+aws configure set region "$AWS_DEFAULT_REGION"
+aws configure set output json
+echo "AWS CLI configured"
+
+curl https://raw.githubusercontent.com/silinternational/ecs-deploy/master/ecs-deploy | sudo tee -a /usr/bin/ecs-deploy
+sudo chmod +x /usr/bin/ecs-deploy
+echo "ecs-deploy downloaded"
+
+ecs-deploy -c $CLUSTER -n $SERVICE -i moretonb/speakops-be:latest -t 20
+echo "kicked off new ECS deploy with updated image"

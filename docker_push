@@ -1,4 +1,0 @@
-#!/bin/bash
-docker build -t moretonb/speakops-be:latest .
-docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD";
-docker push moretonb/speakops-be:latest
