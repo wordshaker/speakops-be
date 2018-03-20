@@ -11,13 +11,16 @@ services:
 before_install:
   - sudo apt-get -qq update
   - sudo apt-get install -y jq
+  - docker pull postgres
+  - docker run -d -p 127.0.0.1:5435:5432 postgres
+  - docker ps -a
   
 install:
   - dotnet restore
   
 script:
   - dotnet build
-  - dotnet test SpeakOps.Api.AcceptanceTests/SpeakOps.Api.AcceptanceTests.csproj
+  - find . -print | grep -i -e '.*tests.csproj$' | dotnet test
   
 deploy:
   provider: script

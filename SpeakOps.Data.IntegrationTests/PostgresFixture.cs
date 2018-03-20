@@ -9,34 +9,18 @@ namespace SpeakOps.Data.IntegrationTests
 {
 	public class PostgresFixture : IDisposable
 	{
-		private const string InitialConnectionString = "Host=localhost;Username=postgres;Password=password;Pooling=false;Database=postgres";
-		private const string SpeakopsDbConnectionString = "Host=localhost;Username=postgres;Password=password;Pooling=false;Database=speakops";
+		private const string PostgresConnectionString = "Host=localhost;Username=postgres;Password=Spe@k0ps;Pooling=false;Database=postgres;Port=5435";
+		private const string SpeakopsConnectionString = "Host=localhost;Username=postgres;Password=Spe@k0ps;Pooling=false;Database=speakops;Port=5435";
 
-		public void Something()
+        public void Something()
 		{
-			using (var createDatabaseConnection = NpgsqlFactory.Instance.CreateConnection())
-			{
-				createDatabaseConnection.ConnectionString = InitialConnectionString;
-				createDatabaseConnection.Open();
+			RecreateDatabaseAndApplySchema();
 
-				createDatabaseConnection.Execute("create database speakops");
-			}
-
-			using (var createSchemaAndTablesConnection = NpgsqlFactory.Instance.CreateConnection())
-			{
-				createSchemaAndTablesConnection.ConnectionString = SpeakopsDbConnectionString;
-				createSchemaAndTablesConnection.Open();
-
-				var sql = File.ReadAllText("./Scripts/speakops_001.sql");
-
-				createSchemaAndTablesConnection.Execute(sql);
-			}
-
-			var sessionFactory = SessionFactory.With(config =>
+		    var sessionFactory = SessionFactory.With(config =>
 			{
 				config
 					.WithProviderFactory(NpgsqlFactory.Instance)
-					.WithConnectionString(SpeakopsDbConnectionString);
+					.WithConnectionString(SpeakopsConnectionString);
 			});
 
 			using (var session = sessionFactory.CreateCommandSession())
@@ -60,15 +44,44 @@ namespace SpeakOps.Data.IntegrationTests
 			}
 		}
 
-		public void Dispose()
-		{
-			using (var deleteDatabaseConnection = NpgsqlFactory.Instance.CreateConnection())
-			{
-				deleteDatabaseConnection.ConnectionString = InitialConnectionString;
-				deleteDatabaseConnection.Open();
+	    private static void RecreateDatabaseAndApplySchema()
+	    {
+	        using (var deleteDatabaseConnection = NpgsqlFactory.Instance.CreateConnection())
+	        {
+	            deleteDatabaseConnection.ConnectionString = PostgresConnectionString;
+	            deleteDatabaseConnection.Open();
 
-				deleteDatabaseConnection.Execute("drop database speakops");
-			}
-		}
+	            deleteDatabaseConnection.Execute("drop database if exists speakops");
+	        }
+
+            using (var createDatabaseConnection = NpgsqlFactory.Instance.CreateConnection())
+	        {
+	            createDatabaseConnection.ConnectionString = PostgresConnectionString;
+	            createDatabaseConnection.Open();
+
+	            createDatabaseConnection.Execute("create database speakops");
+	        }
+
+	        using (var createSchemaAndTablesConnection = NpgsqlFactory.Instance.CreateConnection())
+	        {
+	            createSchemaAndTablesConnection.ConnectionString = SpeakopsConnectionString;
+	            createSchemaAndTablesConnection.Open();
+
+	            var sql = File.ReadAllText("./Scripts/speakops_001.sql");
+
+	            createSchemaAndTablesConnection.Execute(sql);
+	        }
+	    }
+
+	    public void Dispose()
+		{
+		    using (var deleteDatabaseConnection = NpgsqlFactory.Instance.CreateConnection())
+		    {
+		        deleteDatabaseConnection.ConnectionString = PostgresConnectionString;
+		        deleteDatabaseConnection.Open();
+
+		        deleteDatabaseConnection.Execute("drop database if exists speakops");
+		    }
+        }
 	}
 }
