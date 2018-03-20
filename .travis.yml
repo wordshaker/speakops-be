@@ -8,6 +8,10 @@ dotnet: 2.1.4
 services:
   - docker
   
+before_install:
+  - sudo apt-get -qq update
+  - sudo apt-get install -y jq
+  
 install:
   - dotnet restore
   
@@ -17,6 +21,6 @@ script:
   
 deploy:
   provider: script
-  script: bash docker_push
+  script: bash docker_push_ecs_deploy
   on:
     branch: master
