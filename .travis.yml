@@ -20,7 +20,7 @@ install:
   
 script:
   - dotnet build
-  - find . -print | grep -i -e '.*tests.csproj$' | dotnet test
+  - find . -name '*.csproj' -type f -print | grep -i -e '.*tests.*' | while read line ; do dotnet test "$line"; done
   
 deploy:
   provider: script
