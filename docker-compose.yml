@@ -6,7 +6,7 @@ api:
     - "5000:5000"
     
 postgres:
-  image: postgres
+  image: postgres:alpine
   restart: unless-stopped
   environment:
     - POSTGRES_PASSWORD=Spe@k0ps

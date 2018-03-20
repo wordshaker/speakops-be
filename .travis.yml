@@ -11,8 +11,8 @@ services:
 before_install:
   - sudo apt-get -qq update
   - sudo apt-get install -y jq
-  - docker pull postgres
-  - docker run -d -p 127.0.0.1:5435:5432 postgres
+  - docker pull postgres:alpine
+  - docker run -d -p 127.0.0.1:5435:5432 postgres:alpine
   - docker ps -a
   
 install:
